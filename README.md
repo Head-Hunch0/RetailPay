@@ -144,6 +144,37 @@ All seeded users share the password: **password**
 - Store managers can view inter-store transfers, which may also reflect inter-branch movement (since branches transfer via stores).
 - A store manager cannot approve a transfer they initiated.
 
+## Testing
+
+RetailPay includes feature and unit tests to validate authentication, route protection, seeders, and basic app logic. Run all tests with:
+
+```
+php artisan test
+```
+
+### Feature Tests
+
+- **AuthTest**: Validates login, logout, and authentication errors.
+	- Login page is accessible
+	- User can login with valid credentials
+	- Login fails with invalid credentials
+	- User can logout
+- **RoutesTest**: Ensures protected routes require authentication and are accessible to logged-in users.
+	- Guests are redirected from all protected routes
+	- Authenticated users can access all GET routes
+- **SeedersTest**: Verifies that all core entities are seeded and relationships are valid.
+	- Database seeder creates users, branches, stores, products, stock, sales, transfers
+	- Seeded users have expected roles and logins
+	- Seeded transfers reference valid entities
+
+### Unit Test
+
+- **ExampleTest**: Basic test to verify PHPUnit setup.
+	- Asserts that true is true
+
+Test files are located in [tests/Feature](tests/Feature) and [tests/Unit](tests/Unit).
+
+---
 ## Notes
 
 - Authentication middleware protects all application routes except login.
